@@ -4,99 +4,151 @@ export default function getNoticias() {
     let pagina = 1;
 
  
+
+
     const url = 'https://api.currentsapi.services/v1/available/categories:'
 
 
 
     const wrapper = document.querySelector('[data-js="noticias"]')
-
+    const inptBusca = document.querySelector('#inptBusca')
     const loader = document.querySelector('.loader')
 
 
 
     const getPosts = async () => {
-        const response = await fetch('https://api.currentsapi.services/v1/search?' +
-        `page_number=${pagina}&` + 'page_size=5&' + 'region=BR&' + 'language=pt&' +
-        'apiKey=REM4gJuyFwfGNm9CtbtVbi3vhF-DI20JecYd6RoVHuHbMYN1');
+        const response = await fetch('https://api.currentsapi.services/v1/latest-news?' +
+            `page_number=${pagina}&` + 'page_size=6&' + 'language=pt&' + 'country=BR&' +
+            'apiKey=REM4gJuyFwfGNm9CtbtVbi3vhF-DI20JecYd6RoVHuHbMYN1');
         //    const data = await response.json(); //espera a promise ser resolvida e atribui o valor da promise a variavel data;
-        return response.json();    
+ 
+        return response.json();
     }
+
+
+    
 
 
     const getNews = async () => {
         const posts = await getPosts();
         console.log(posts)
         const noticias = posts.news;
-
-        const postsTemplate = noticias.map(({title, description, url, category, published }) =>{
+        const postsTemplate = noticias.map(({ title, description, url, category, published, image }) => {
             let data = published.substr(0, 10).replace('-', '/').replace('-', '/');
-            return ` <div class="blog__conteudo-wrapper-item">
-            <div class="blog__conteudo-wrapper-item-nav">
-                <span class="data__publicacao" data-dia="${data}">${data}</span>
-                <span></span>
-                <a href="#" class="btn__favorite"></a>
+     
+            if (image != 'None') {
+                return `<div class="blog__conteudo-wrapper-item">
+                <div class="blog__conteudo-wrapper-item-foto">
+                    <img src="${image}">
+                </div>    
+                <div class="blog__conteudo-wrapper-item-texto">
+                    <div class="blog__conteudo-wrapper-item-texto-informacoes">
+                        <span class="data__publicacao" data-dia="${data}">${data}</span>
+                        <span></span>
+                        <a href="#" class="btn__favorite"></a>
+                    </div>
+                    <h2 class="titulo__materia" data-titulo="${title}">${title}</h2>
+                    <p class="texto__materia" data-texto="${description}">${description}</p>
+                    <a href="${url}" target="_blank" class="ver_mais">Ler mais</a>
+                </div>
             </div>
-            <div class="blog__conteudo-wrapper-item-texto">
-                <h2 class="titulo__materia" data-titulo="${title}">${title}</h2>
-                <p class="texto__materia" data-texto="${description}">${description}</p>
-                <a href="${url}" target="_blank" class="ver_mais">Ler mais</a>
-
+            `
+            }
+            return `<div class="blog__conteudo-wrapper-item">    
+                <div class="blog__conteudo-wrapper-item-texto">
+                    <div class="blog__conteudo-wrapper-item-texto-informacoes">
+                        <span class="data__publicacao" data-dia="${data}">${data}</span>
+                        <span></span>
+                        <a href="#" class="btn__favorite"></a>
+                    </div>
+                    <h2 class="titulo__materia" data-titulo="${title}">${title}</h2>
+                    <p class="texto__materia" data-texto="${description}">${description}</p>
+                    <a href="${url}" target="_blank" class="ver_mais">Ler mais</a>
+                </div>
             </div>
-        </div>
-        `
-        }).join('');
+            `
 
-        wrapper.innerHTML += postsTemplate;
+        });
+
+        wrapper.innerHTML += postsTemplate.join('');
         filtrarNoticias();
+        // selectFilter();
+
     }
+
+
+
+    
+    getNews()
+
+
+
+
+
+    // function selectFilter() {
+    //     const select = document.querySelector('.filtro select');
+    //     select.addEventListener('change', (e) => {
+    //         if (e.target.value == 'Geral') {
+    //             valor = 'general';
+    //             getNews();
+             
+    //         } else if(e.target.value == 'Esporte') {
+    //             valor = 'sports';
+    //             getNews();
+    //         } else if(e.target.value == 'Política') {
+    //             valor = 'politics';
+    //             getNews();
+    //         }
+    //     })
+
+    // }
 
 
 
     /* atualizar de hora em hora */
     // setInterval(mostrarNoticias, 1000 * 60 * 60)
-    getNews()
 
 
 
-    const getNextPosts = () =>{
-        pagina++;
+    const getNextPosts = () => {
+        pagina++
         console.log(pagina)
         getNews();
-    
+
     }
-    
-    const removeLoader = () =>{
-        setTimeout(() =>{
+
+
+    const removeLoader = () => {
+        setTimeout(() => {
             loader.classList.remove('show');
             getNextPosts();
         }, 1000)
     }
-    
-    
-    const showLoader = () =>{
+
+
+    const showLoader = () => {
         loader.classList.add('show');
         removeLoader();
     }
-    
-    
-    
+
+
+
     window.addEventListener('scroll', () => {
         const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
-    
         const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 10;
-        if(isPageBottomAlmostReached) {
+        if (isPageBottomAlmostReached) {
             showLoader();
-        } 
-    
+        }
+
     })
 
 
+    
 
 
     function filtrarNoticias() {
-        const btnBusca = document.querySelector('#btnBusca');
-        const inptBusca = document.querySelector('#inptBusca')
         const noticiasItem = document.querySelectorAll(".blog__conteudo-wrapper-item")
+
         /* limpar busca */
         function limpar(index) {
             noticiasItem.forEach((div) => {
@@ -109,9 +161,9 @@ export default function getNoticias() {
             return div.innerHTML.toUpperCase().replace(/[ÀÁÂÃÄÅ]/g, "A");
         }
 
+
         /* filtro da busca */
         function filtro(e) {
-            console.log(e)
             noticiasItem.forEach((div, index) => {
                 const valorInput = inptBusca.value.toUpperCase().replace(/[ÀÁÂÃÄÅ]/g, "A");
                 if (removeEspeciais(div).indexOf(valorInput) == -1) {
@@ -127,6 +179,11 @@ export default function getNoticias() {
         inptBusca.addEventListener('keyup', filtro)
     }
 
-   
+
+
+
+
+
+
 }
 

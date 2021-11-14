@@ -1,59 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend+Deca:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-        
-    <link rel="stylesheet" href="assets/sass/style.css">
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend+Deca:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/sass/style.css" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="blog__header">
-        <div class="container">
-            <div class="menu">
-                <div class="logo">
-                    <p>Power</p>
-                </div>
-                <nav>
-                    <p>blog</p>
-                </nav>
-            </div>
-
-            <form class="blog__header-busca">
-                <div class="input__box">
-                    <button type="button" id="btnBusca"><ion-icon name="search-outline" ></ion-icon></button>
-                    <input type="text" placeholder="Pesquisar no blog" id="inptBusca" >
-                </div>
-            </form>
+      <div class="container">
+        <div class="menu">
+          <div class="logo">
+            <a href="index.html">Power</a>
+          </div>
+          <nav>
+            <p>blog</p>
+          </nav>
         </div>
+
+        <form class="blog__header-busca">
+          <div class="input__box">
+            <button type="button" id="btnBusca">
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
+            <input type="text" placeholder="Pesquisar no blog" id="inptBusca" />
+          </div>
+        </form>
+      </div>
     </header>
 
-
     <section class="blog__conteudo">
-        <div class="container">
-            <div class="blog__conteudo-wrapper" data-js="noticias">
-            
-            </div>
+      <div class="container">
+        <div class="filtro">
+          <!-- <select name="filtro" id="filtro">
+            <option value="Geral">Geral</option>
+            <option value="Esporte">Esporte</option>
+            <option value="Política">Política</option>
+          </select> -->
         </div>
+        <div class="blog__conteudo-wrapper" data-js="noticias"></div>
+      </div>
     </section>
 
     <div class="loader">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-      </div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
 
- 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
     <script type="module" src="assets/js/main.js"></script>
-</body>
-
+  </body>
 </html>
