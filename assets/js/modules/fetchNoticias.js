@@ -18,7 +18,7 @@ export default function getNoticias() {
 
     const getPosts = async () => {
         const response = await fetch('https://api.currentsapi.services/v1/latest-news?' +
-            `page_number=${pagina}&` + 'page_size=6&' + 'language=pt&' + 'country=BR&' +
+            `page_number=${pagina}&` + 'page_size=100&' + 'language=pt&' + 'country=BR&' +
             'apiKey=REM4gJuyFwfGNm9CtbtVbi3vhF-DI20JecYd6RoVHuHbMYN1');
         //    const data = await response.json(); //espera a promise ser resolvida e atribui o valor da promise a variavel data;
  
@@ -72,8 +72,6 @@ export default function getNoticias() {
 
         wrapper.innerHTML += postsTemplate.join('');
         filtrarNoticias();
-        // selectFilter();
-
     }
 
 
@@ -106,41 +104,42 @@ export default function getNoticias() {
 
 
     /* atualizar de hora em hora */
-    // setInterval(mostrarNoticias, 1000 * 60 * 60)
+    setInterval(getNews, 1000 * 60 * 60)
+
+
+/* Comentado para implantar melhorias depois*/
+
+    // const getNextPosts = () => {
+    //     pagina++
+    //     console.log(pagina)
+    //     getNews();
+
+    // }
+
+
+    // const removeLoader = () => {
+    //     setTimeout(() => {
+    //         loader.classList.remove('show');
+    //         getNextPosts();
+    //     }, 1000)
+    // }
+
+
+    // const showLoader = () => {
+    //     loader.classList.add('show');
+    //     removeLoader();
+    // }
 
 
 
-    const getNextPosts = () => {
-        pagina++
-        console.log(pagina)
-        getNews();
+    // window.addEventListener('scroll', () => {
+    //     const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
+    //     const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 10;
+    //     if (isPageBottomAlmostReached) {
+    //         showLoader();
+    //     }
 
-    }
-
-
-    const removeLoader = () => {
-        setTimeout(() => {
-            loader.classList.remove('show');
-            getNextPosts();
-        }, 1000)
-    }
-
-
-    const showLoader = () => {
-        loader.classList.add('show');
-        removeLoader();
-    }
-
-
-
-    window.addEventListener('scroll', () => {
-        const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
-        const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 10;
-        if (isPageBottomAlmostReached) {
-            showLoader();
-        }
-
-    })
+    // })
 
 
     
