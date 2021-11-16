@@ -50,7 +50,11 @@ body {
 }
 
 .blog__header {
-  background: linear-gradient(90deg, #574AE8 0%, #3EA1DB 100%);
+  background: #4b6cb7;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #182848, #4b6cb7);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   padding: 32px 0 16px 0;
   position: fixed;
   top: 0;
@@ -92,18 +96,14 @@ body {
 .blog__header-busca .input__box {
   position: relative;
 }
-.blog__header-busca .input__box button {
+.blog__header-busca .input__box .img__lupa {
   position: absolute;
-  top: 12px;
-  left: 16px;
-  border: none;
-  outline: 0;
-  background: none;
-  cursor: pointer;
-  padding: 0 8px;
+  display: block;
+  top: -2px;
+  padding-left: 24px;
 }
-.blog__header-busca .input__box button ion-icon {
-  font-size: 24px;
+.blog__header-busca .input__box .img__lupa ion-icon {
+  font-size: 22px;
   color: var(--cor-branco);
 }
 .blog__header-busca .input__box input {
@@ -119,14 +119,17 @@ body {
 .blog__header-busca .input__box input::-moz-placeholder {
   color: var(--cor-branco);
   font-weight: 500;
+  font-size: 0.875rem;
 }
 .blog__header-busca .input__box input:-ms-input-placeholder {
   color: var(--cor-branco);
   font-weight: 500;
+  font-size: 0.875rem;
 }
 .blog__header-busca .input__box input::placeholder {
   color: var(--cor-branco);
   font-weight: 500;
+  font-size: 0.875rem;
 }
 .blog__header-busca span {
   display: block;

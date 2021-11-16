@@ -70,7 +70,11 @@ body {
 
 
 .blog__header {
-    background: linear-gradient(90deg, #574AE8 0%, #3EA1DB 100%);
+    background: #4b6cb7;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    // background: linear-gradient(90deg, #574AE8 0%, #3EA1DB 100%);
     padding: 32px 0 16px 0;
     position: fixed;
     top: 0;
@@ -122,22 +126,17 @@ body {
 
         .input__box {
             position: relative;
-
-            button {
+            .img__lupa{
                 position: absolute;
-                top: 12px;
-                left: 16px;
-                border: none;
-                outline: 0;
-                background: none;
-                cursor: pointer;
-                padding: 0 8px;
-
+                display: block;
+                top: -2px;
+                padding-left: 24px;
                 ion-icon {
-                    font-size: 24px;
+                    font-size: 22px;
                     color: $cor-branco;
                 }
             }
+     
 
             input {
                 outline: none;
@@ -152,6 +151,7 @@ body {
                 &::placeholder {
                     color: $cor-branco;
                     font-weight: 500;
+                    font-size: 0.875rem;
                 }
             }
         }

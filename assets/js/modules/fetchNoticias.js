@@ -3,7 +3,7 @@ export default function getNoticias() {
 
     let pagina = 1;
 
- 
+    let valor;
 
 
     const url = 'https://api.currentsapi.services/v1/available/categories:'
@@ -17,16 +17,16 @@ export default function getNoticias() {
 
 
     const getPosts = async () => {
-        const response = await fetch('https://api.currentsapi.services/v1/latest-news?' +
-            `page_number=${pagina}&` + 'page_size=100&' + 'language=pt&' + 'country=BR&' +
+        const response = await fetch('https://api.currentsapi.services/v1/latest-news?' + `category=${valor}&` +
+            `page_number=${pagina}&` + 'page_size=6&' + 'language=pt&' + 'country=BR&' +
             'apiKey=REM4gJuyFwfGNm9CtbtVbi3vhF-DI20JecYd6RoVHuHbMYN1');
         //    const data = await response.json(); //espera a promise ser resolvida e atribui o valor da promise a variavel data;
- 
+
+        console.log(response)
         return response.json();
+
     }
 
-
-    
 
 
     const getNews = async () => {
@@ -35,7 +35,7 @@ export default function getNoticias() {
         const noticias = posts.news;
         const postsTemplate = noticias.map(({ title, description, url, category, published, image }) => {
             let data = published.substr(0, 10).replace('-', '/').replace('-', '/');
-     
+
             if (image != 'None') {
                 return `<div class="blog__conteudo-wrapper-item">
                 <div class="blog__conteudo-wrapper-item-foto">
@@ -71,86 +71,100 @@ export default function getNoticias() {
         });
 
         wrapper.innerHTML += postsTemplate.join('');
-        filtrarNoticias();
+        searchNews()
+
+
     }
 
 
-
-    
     getNews()
 
+    filterCategory()
 
 
+    function filterCategory() {
+        const select = document.querySelector('.filtro select');
+        select.addEventListener('change', (e) => {
+            switch (e.target.value) {
+                case 'Geral':
+                    wrapper.innerHTML = '';
+                    valor = undefined;
+                    getNews();
+                    break;
+                case 'Esporte':
+                    wrapper.innerHTML = '';
+                    valor = 'sports';
+                    getNews();
+                    break;
+                case 'Economia':
+                    wrapper.innerHTML = '';
+                    valor = 'economy';
+                    getNews();
+                    break;
+                case 'Mundo':
+                    wrapper.innerHTML = '';
+                    valor = 'world';
+                    getNews();
+                    break;
+                case 'Politica':
+                    wrapper.innerHTML = '';
+                    valor = 'politics';
+                    getNews();
+                    break;
 
 
-    // function selectFilter() {
-    //     const select = document.querySelector('.filtro select');
-    //     select.addEventListener('change', (e) => {
-    //         if (e.target.value == 'Geral') {
-    //             valor = 'general';
-    //             getNews();
-             
-    //         } else if(e.target.value == 'Esporte') {
-    //             valor = 'sports';
-    //             getNews();
-    //         } else if(e.target.value == 'Política') {
-    //             valor = 'politics';
-    //             getNews();
-    //         }
-    //     })
+            }
+        });
 
-    // }
-
-
-
+    }
     /* atualizar de hora em hora */
     setInterval(getNews, 1000 * 60 * 60)
 
 
-/* Comentado para implantar melhorias depois*/
-
-    // const getNextPosts = () => {
-    //     pagina++
-    //     console.log(pagina)
-    //     getNews();
-
-    // }
 
 
-    // const removeLoader = () => {
-    //     setTimeout(() => {
-    //         loader.classList.remove('show');
-    //         getNextPosts();
-    //     }, 1000)
-    // }
+    const getNextPosts = () => {
+        pagina++
+        console.log(pagina)
+        getNews();
+
+    }
 
 
-    // const showLoader = () => {
-    //     loader.classList.add('show');
-    //     removeLoader();
-    // }
+    const removeLoader = () => {
+        setTimeout(() => {
+            loader.classList.remove('show');
+            getNextPosts();
+        }, 1000)
+    }
+
+
+    const showLoader = () => {
+        loader.classList.add('show');
+        removeLoader();
+    }
 
 
 
-    // window.addEventListener('scroll', () => {
-    //     const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
-    //     const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 10;
-    //     if (isPageBottomAlmostReached) {
-    //         showLoader();
-    //     }
+    window.addEventListener('scroll', () => {
+        const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
+        const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 10;
+        if (isPageBottomAlmostReached) {
+            showLoader();
+        }
 
-    // })
-
-
-    
+    })
 
 
-    function filtrarNoticias() {
-        const noticiasItem = document.querySelectorAll(".blog__conteudo-wrapper-item")
+
+
+
+    function searchNews() {
+        const newsItem = document.querySelectorAll(".blog__conteudo-wrapper-item")
 
         /* limpar busca */
         function limpar(index) {
-            noticiasItem.forEach((div) => {
+            newsItem.forEach((div) => {
                 div.style.display = "block";
             })
         }
@@ -163,7 +177,7 @@ export default function getNoticias() {
 
         /* filtro da busca */
         function filtro(e) {
-            noticiasItem.forEach((div, index) => {
+            newsItem.forEach((div, index) => {
                 const valorInput = inptBusca.value.toUpperCase().replace(/[ÀÁÂÃÄÅ]/g, "A");
                 if (removeEspeciais(div).indexOf(valorInput) == -1) {
                     div.style.display = "none";

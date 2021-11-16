@@ -12,7 +12,7 @@
     />
 
     <link rel="stylesheet" href="assets/sass/style.css" />
-    <title>Power| Portal de Noticias</title>
+    <title>Power | Portal de Noticias</title>
   </head>
 
   <body>
@@ -23,16 +23,20 @@
             <a href="index.html">Power</a>
           </div>
           <nav>
-            <a href="https://github.com/brunobarross" target="_blank"><img src="assets/img/github.svg" /></a>
-            <a href="https://www.linkedin.com/in/altamiro-bruno-0b853697/" target="_blank"><img src="assets/img/logo-linkedin.svg" /></a>
+            <a href="https://github.com/brunobarross" target="_blank"
+              ><img src="assets/img/github.svg"
+            /></a>
+            <a
+              href="https://www.linkedin.com/in/altamiro-bruno-0b853697/"
+              target="_blank"
+              ><img src="assets/img/logo-linkedin.svg"
+            /></a>
           </nav>
         </div>
 
         <div class="blog__header-busca" action="">
           <div class="input__box">
-            <button type="button" id="btnBusca">
-              <ion-icon name="search-outline"></ion-icon>
-            </button>
+            <span class="img__lupa"> <ion-icon name="search-outline"></ion-icon></span>
             <input type="text" placeholder="Pesquisar no blog" id="inptBusca" />
           </div>
           <span>©️ Desenvolvido por Altamiro Bruno</span>
@@ -43,11 +47,13 @@
     <section class="blog__conteudo">
       <div class="container">
         <div class="filtro">
-          <!-- <select name="filtro" id="filtro">
+          <select name="filtro" id="filtro">
             <option value="Geral">Geral</option>
             <option value="Esporte">Esporte</option>
-            <option value="Política">Política</option>
-          </select> -->
+            <option value="Economia">Economia</option>
+            <option value="Mundo">Mundo</option>
+            <option value="Politica">Política</option>
+          </select>
         </div>
         <div class="blog__conteudo-wrapper" data-js="noticias"></div>
       </div>
