@@ -3,12 +3,9 @@ export default function getNoticias() {
 
     let pagina = 1;
 
-    let valor;
+    let categoria;
 
-
-    const url = 'https://api.currentsapi.services/v1/available/categories:'
-
-
+    let ativo = false;
 
     const wrapper = document.querySelector('[data-js="noticias"]')
     const inptBusca = document.querySelector('#inptBusca')
@@ -16,15 +13,31 @@ export default function getNoticias() {
 
 
 
+    /* executa e remove o loading ao carregar a página */
+
+    const loading = () => {
+        loader.classList.add('show');
+        removeLoading();
+    }
+
+    const removeLoading = () => {
+        setInterval(() => {
+            loader.classList.remove('show');
+        }, 1000)
+    }
+
+    loading();
+
+
+
     const getPosts = async () => {
-        const response = await fetch('https://api.currentsapi.services/v1/latest-news?' + `category=${valor}&` +
+        const response = await fetch('https://api.currentsapi.services/v1/latest-news?' + `category=${categoria}&` +
             `page_number=${pagina}&` + 'page_size=6&' + 'language=pt&' + 'country=BR&' +
             'apiKey=REM4gJuyFwfGNm9CtbtVbi3vhF-DI20JecYd6RoVHuHbMYN1');
         //    const data = await response.json(); //espera a promise ser resolvida e atribui o valor da promise a variavel data;
 
         console.log(response)
         return response.json();
-
     }
 
 
@@ -67,101 +80,64 @@ export default function getNoticias() {
                 </div>
             </div>
             `
-
         });
-
         wrapper.innerHTML += postsTemplate.join('');
-        searchNews()
-
-
+        searchNews();
     }
 
 
     getNews()
-
     filterCategory()
 
 
-    function filterCategory() {
-        const select = document.querySelector('.filtro select');
-        select.addEventListener('change', (e) => {
-            switch (e.target.value) {
-                case 'Geral':
-                    wrapper.innerHTML = '';
-                    valor = undefined;
-                    getNews();
-                    break;
-                case 'Esporte':
-                    wrapper.innerHTML = '';
-                    valor = 'sports';
-                    getNews();
-                    break;
-                case 'Economia':
-                    wrapper.innerHTML = '';
-                    valor = 'economy';
-                    getNews();
-                    break;
-                case 'Mundo':
-                    wrapper.innerHTML = '';
-                    valor = 'world';
-                    getNews();
-                    break;
-                case 'Politica':
-                    wrapper.innerHTML = '';
-                    valor = 'politics';
-                    getNews();
-                    break;
 
-
-            }
-        });
-
-    }
-    /* atualizar de hora em hora */
+    /* atualizar noticias de hora em hora */
     setInterval(getNews, 1000 * 60 * 60)
 
 
 
-
+    /* acrescenta mais um em página para mostrar mais publicações*/
     const getNextPosts = () => {
         pagina++
         console.log(pagina)
         getNews();
-
     }
 
 
+    /* remover animação de loading */
     const removeLoader = () => {
         setTimeout(() => {
             loader.classList.remove('show');
             getNextPosts();
+            ativo = false;
         }, 1000)
     }
 
 
+    /* adiciona animação de loading ao final da página */
     const showLoader = () => {
+        ativo = true;
         loader.classList.add('show');
         removeLoader();
     }
 
 
 
+    /* adicionar evento ao chegar no fim da página */
+
     window.addEventListener('scroll', () => {
         const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
         const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 10;
-        if (isPageBottomAlmostReached) {
+        if (isPageBottomAlmostReached && !ativo) {
             showLoader();
         }
-
     })
 
 
 
-
-
+    /* busca de noticias*/
     function searchNews() {
         const newsItem = document.querySelectorAll(".blog__conteudo-wrapper-item")
-
         /* limpar busca */
         function limpar(index) {
             newsItem.forEach((div) => {
@@ -170,7 +146,7 @@ export default function getNoticias() {
         }
 
         /* função que remove caracteres especiais*/
-        function removeEspeciais(div) {
+        function removeSpecialChars(div) {
             return div.innerHTML.toUpperCase().replace(/[ÀÁÂÃÄÅ]/g, "A");
         }
 
@@ -179,7 +155,7 @@ export default function getNoticias() {
         function filtro(e) {
             newsItem.forEach((div, index) => {
                 const valorInput = inptBusca.value.toUpperCase().replace(/[ÀÁÂÃÄÅ]/g, "A");
-                if (removeEspeciais(div).indexOf(valorInput) == -1) {
+                if (removeSpecialChars(div).indexOf(valorInput) == -1) {
                     div.style.display = "none";
                     inptBusca.addEventListener("input", function () {
                         limpar(index);
@@ -193,9 +169,45 @@ export default function getNoticias() {
     }
 
 
+    /* filtrar por categorias*/
+    function filterCategory() {
+        const select = document.querySelector('.filtro select');
+        select.addEventListener('change', (e) => {
+            switch (e.target.value) {
+                case 'Geral':
+                    wrapper.innerHTML = '';
+                    categoria = undefined;
+                    getNews();
+                    loading();
+                    break;
+                case 'Esporte':
+                    wrapper.innerHTML = '';
+                    categoria = 'sports';
+                    getNews();
+                    loading();
+                    break;
+                case 'Economia':
+                    wrapper.innerHTML = '';
+                    categoria = 'economy';
+                    getNews();
+                    loading();
+                    break;
+                case 'Mundo':
+                    wrapper.innerHTML = '';
+                    categoria = 'world';
+                    getNews();
+                    loading();
+                    break;
+                case 'Politica':
+                    wrapper.innerHTML = '';
+                    categoria = 'politics';
+                    getNews();
+                    loading();
+                    break;
+            }
+        });
 
-
-
+    }
 
 
 }
