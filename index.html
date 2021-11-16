@@ -10,6 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend+Deca:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
+    />
 
     <link rel="stylesheet" href="assets/sass/style.css" />
     <title>Power | Portal de Noticias</title>
@@ -36,17 +40,19 @@
 
         <div class="blog__header-busca" action="">
           <div class="input__box">
-            <span class="img__lupa"> <ion-icon name="search-outline"></ion-icon></span>
+            <span class="img__lupa">
+              <ion-icon name="search-outline"></ion-icon
+            ></span>
             <input type="text" placeholder="Pesquisar no blog" id="inptBusca" />
           </div>
-          <span>©️ Desenvolvido por Altamiro Bruno</span>
+          <span>©️ 2021 Orgulhosamente desenvolvido por Altamiro Bruno.</span>
         </div>
       </div>
     </header>
 
     <section class="blog__conteudo">
       <div class="container">
-        <div class="filtro">
+        <div class="filtro__categoria">
           <select name="filtro" id="filtro">
             <option value="Geral">Geral</option>
             <option value="Esporte">Esporte</option>
@@ -69,6 +75,21 @@
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <script type="module" src="assets/js/main.js"></script>
+    <script>
+      const element = document.querySelector("#filtro");
+      const choices = new Choices(element, {
+        searchEnabled: true,
+        searchChoices: true,
+        searchFields: ["label", "value"],
+        placeholder: true,
+        renderSelectedChoices: "auto",
+        loadingText: "Loading...",
+        noResultsText: "Categoria não encontrada",
+        noChoicesText: "Categoria não encontrada",
+        itemSelectText: 'Selecionar',
+      });
+    </script>
   </body>
 </html>

@@ -47,7 +47,9 @@ export default function getNoticias() {
         console.log(posts)
         const noticias = posts.news;
         const postsTemplate = noticias.map(({ title, description, url, category, published, image }) => {
-            let data = published.substr(0, 10).replace('-', '/').replace('-', '/');
+            let data = published.substr(0, 10).replace('-', '/').replace('-', '/').split('/').reverse().join('/');
+            
+         
 
             if (image != 'None') {
                 return `<div class="blog__conteudo-wrapper-item">
@@ -171,7 +173,7 @@ export default function getNoticias() {
 
     /* filtrar por categorias*/
     function filterCategory() {
-        const select = document.querySelector('.filtro select');
+        const select = document.querySelector('.filtro__categoria select');
         select.addEventListener('change', (e) => {
             switch (e.target.value) {
                 case 'Geral':
