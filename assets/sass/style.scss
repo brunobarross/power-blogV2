@@ -175,9 +175,15 @@ body {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 32px;
 
+        @media(max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 32px;
+        }
+
         @media(max-width: 540px) {
             display: flex;
             flex-direction: column;
+            grid-gap: 0;
         }
 
 
@@ -188,6 +194,13 @@ body {
             border-radius: 4px;
             overflow: hidden;
             transition: box-shadow .3s ease-in;
+
+            &+.blog__conteudo-wrapper-item {
+                @media(max-width: 540px) {
+                    margin-top: 16px;
+                }
+
+            }
 
             &:hover {
                 box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -276,7 +289,7 @@ body {
     transition: opacity 0.3s ease-in;
 
     .circle {
-        background-color: #574AE8;
+        background-color: #4b6cb7;
         width: 10px;
         height: 10px;
         border-radius: 50%;
