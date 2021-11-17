@@ -48,28 +48,14 @@ export default function getNoticias() {
         const noticias = posts.news;
         const postsTemplate = noticias.map(({ title, description, url, category, published, image }) => {
             let data = published.substr(0, 10).replace('-', '/').replace('-', '/').split('/').reverse().join('/');
-            
-         
-
-            if (image != 'None') {
-                return `<div class="blog__conteudo-wrapper-item">
+            // if (image != 'None') {
+            return `<div class="blog__conteudo-wrapper-item">
+                ${image != 'None' ? `
                 <div class="blog__conteudo-wrapper-item-foto">
                     <img src="${image}">
-                </div>    
-                <div class="blog__conteudo-wrapper-item-texto">
-                    <div class="blog__conteudo-wrapper-item-texto-informacoes">
-                        <span class="data__publicacao" data-dia="${data}">${data}</span>
-                        <span></span>
-                        <a href="#" class="btn__favorite"></a>
-                    </div>
-                    <h2 class="titulo__materia" data-titulo="${title}">${title}</h2>
-                    <p class="texto__materia" data-texto="${description}">${description}</p>
-                    <a href="${url}" target="_blank" class="ver_mais">Ler mais</a>
                 </div>
-            </div>
-            `
-            }
-            return `<div class="blog__conteudo-wrapper-item">    
+                `: `  <div class="blog__conteudo-wrapper-item-foto">
+            </div>` }    
                 <div class="blog__conteudo-wrapper-item-texto">
                     <div class="blog__conteudo-wrapper-item-texto-informacoes">
                         <span class="data__publicacao" data-dia="${data}">${data}</span>
