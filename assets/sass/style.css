@@ -44,7 +44,7 @@ body {
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -141,7 +141,7 @@ body {
 }
 .blog__conteudo-wrapper {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 32px;
 }
 @media (max-width: 540px) {
