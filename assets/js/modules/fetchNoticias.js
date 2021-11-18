@@ -33,7 +33,7 @@ export default function getNoticias() {
     const getPosts = async () => {
         const response = await fetch('https://api.currentsapi.services/v1/latest-news?' + `category=${categoria}&` +
             `page_number=${pagina}&` + 'page_size=6&' + 'language=pt&' + 'country=BR&' +
-            'apiKey=REM4gJuyFwfGNm9CtbtVbi3vhF-DI20JecYd6RoVHuHbMYN1');
+            'apiKey=o-CiQo9PEN-SzlLKFW8HiLAhnO0rr1_kB7DSAA1CSB_FJW3q');
         //    const data = await response.json(); //espera a promise ser resolvida e atribui o valor da promise a variavel data;
 
         console.log(response)
