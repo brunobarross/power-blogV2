@@ -52,15 +52,29 @@
 
     <section class="blog__conteudo">
       <div class="container">
-        <div class="filtro__categoria">
-          <select name="filtro" id="filtro">
-            <option value="Geral">Geral</option>
-            <option value="Esporte">Esporte</option>
-            <option value="Economia">Economia</option>
-            <option value="Mundo">Mundo</option>
-            <option value="Politica">Política</option>
-          </select>
+        <div class="filtro__wrapper">
+          <div class="filtro__input">
+            <label for="filtroPais">Selecione a Região
+            </label>
+            <select name="filtro" id="filtroPais">
+              <option value="Brasil">Brasil</option>
+              <option value="Internacional">Internacional</option>
+              
+            </select>
+          </div>
+          <div class="filtro__input">
+            <label for="filtroCategoria">Selecione a Categoria</label>
+            <select name="filtroCategoria" id="filtroCategoria">
+              <option value="Geral">Geral</option>
+              <option value="Esporte">Esporte</option>
+              <option value="Economia">Economia</option>
+              <option value="Mundo">Mundo</option>
+              <option value="Politica">Política</option>
+            </select>
+          </div>
+      
         </div>
+
         <div class="blog__conteudo-wrapper" data-js="noticias"></div>
       </div>
     </section>
@@ -78,9 +92,11 @@
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <script type="module" src="assets/js/main.js"></script>
     <script>
-      const element = document.querySelector("#filtro");
-      const choices = new Choices(element, {
-        searchEnabled: true,
+      const filtroCategoria = document.querySelector("#filtroCategoria");
+      const filtroPais = document.querySelector("#filtroPais");
+
+      const category = new Choices(filtroCategoria, {
+        searchEnabled: false,
         searchChoices: true,
         searchFields: ["label", "value"],
         placeholder: true,
@@ -88,7 +104,19 @@
         loadingText: "Loading...",
         noResultsText: "Categoria não encontrada",
         noChoicesText: "Categoria não encontrada",
-        itemSelectText: 'Selecionar',
+        itemSelectText: "Selecionar",
+      });
+
+      const country = new Choices(filtroPais, {
+        searchEnabled: false,
+        searchChoices: true,
+        searchFields: ["label", "value"],
+        placeholder: true,
+        renderSelectedChoices: "auto",
+        loadingText: "Loading...",
+        noResultsText: "Categoria não encontrada",
+        noChoicesText: "Categoria não encontrada",
+        itemSelectText: "Selecionar",
       });
     </script>
   </body>

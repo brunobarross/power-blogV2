@@ -3,6 +3,8 @@ export default function getNoticias() {
 
     let pagina = 1;
 
+    let pais = 'BR';
+    let idioma = 'pt';
     let categoria;
 
     let ativo = false;
@@ -32,7 +34,7 @@ export default function getNoticias() {
 
     const getPosts = async () => {
         const response = await fetch('https://api.currentsapi.services/v1/latest-news?' + `category=${categoria}&` +
-            `page_number=${pagina}&` + 'page_size=6&' + 'language=pt&' + 'country=BR&' +
+            `page_number=${pagina}&` + 'page_size=6&' + `language=${idioma}&` + `country=${pais}&` +
             'apiKey=o-CiQo9PEN-SzlLKFW8HiLAhnO0rr1_kB7DSAA1CSB_FJW3q');
         //    const data = await response.json(); //espera a promise ser resolvida e atribui o valor da promise a variavel data;
 
@@ -75,7 +77,9 @@ export default function getNoticias() {
 
 
     getNews()
+    filterCountry()
     filterCategory()
+  
 
 
 
@@ -159,7 +163,7 @@ export default function getNoticias() {
 
     /* filtrar por categorias*/
     function filterCategory() {
-        const select = document.querySelector('.filtro__categoria select');
+        const select = document.querySelector('#filtroCategoria');
         select.addEventListener('change', (e) => {
             switch (e.target.value) {
                 case 'Geral':
@@ -197,6 +201,29 @@ export default function getNoticias() {
 
     }
 
+    function filterCountry() {
+        const selectCountry = document.querySelector('#filtroPais');
+        selectCountry.addEventListener('change', (e) => {
+            console.log(e.target)
+            switch (e.target.value) {
+                case 'Brasil':
+                    wrapper.innerHTML = '';
+                    pais = 'BR';
+                    idioma = 'pt';
+                    getNews();
+                    loading();
+                    break;
+                case 'Internacional':
+                    wrapper.innerHTML = '';
+                    pais = 'US';
+                    idioma = 'en';
+                    getNews();
+                    loading();
+                    break;
+            }
+        });
+
+    }
 
 }
 

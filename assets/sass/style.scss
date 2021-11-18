@@ -267,19 +267,41 @@ body {
     }
 }
 
-
-.filtro__categoria {
-    margin-bottom: 32px;
+.filtro__wrapper {
     display: flex;
-    justify-content: flex-end;
-
-    select {
-        padding: 8px;
-        border-radius: 4px;
-        outline: none;
-        font-size: 14px;
+    align-items: center;
+    @media(max-width: 540px) {
+        flex-direction: column;
+        align-items: stretch;
     }
+
+    .filtro__input {
+        margin-bottom: 32px;
+        display: flex;
+        flex-direction: column;
+        & + .filtro__input{
+            margin-left: 16px;
+            @media(max-width: 540px) {
+                margin-left: 0;
+              
+            }
+        }
+
+        label {
+            margin-bottom: 16px;
+        }
+
+        select {
+            padding: 8px;
+            border-radius: 4px;
+            outline: none;
+            font-size: 14px;
+        }
+    }
+
 }
+
+
 
 .loader {
     opacity: 0;
