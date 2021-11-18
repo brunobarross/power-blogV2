@@ -119,6 +119,7 @@ export default function getNoticias() {
 
     window.addEventListener('scroll', () => {
         const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
+        console.log(clientHeight, scrollHeight, scrollTop)
         const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 10;
         if (isPageBottomAlmostReached && !ativo) {
             showLoader();

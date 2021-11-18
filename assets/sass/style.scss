@@ -270,6 +270,7 @@ body {
 .filtro__wrapper {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     @media(max-width: 540px) {
         flex-direction: column;
         align-items: stretch;
