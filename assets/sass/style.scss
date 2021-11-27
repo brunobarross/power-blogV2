@@ -68,7 +68,6 @@ body {
     padding: 0 1rem;
 }
 
-
 .blog__header {
     background: linear-gradient(to right, #182848, #4b6cb7);
     padding: 32px 0 16px 0;
@@ -166,13 +165,13 @@ body {
     }
 }
 
-
 .blog__conteudo {
     margin: 290px 0 90px 0;
 
     &-wrapper {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        align-items: flex-start;
         grid-gap: 32px;
 
         @media(max-width: 1024px) {
@@ -194,7 +193,7 @@ body {
             border-radius: 4px;
             overflow: hidden;
             transition: box-shadow .3s ease-in;
-
+            cursor: pointer;
             &+.blog__conteudo-wrapper-item {
                 @media(max-width: 540px) {
                     margin-top: 16px;
@@ -203,7 +202,8 @@ body {
             }
 
             &:hover {
-                box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                // box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+                box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
             }
 
             &:not(:last-child) {
@@ -261,6 +261,25 @@ body {
                     margin-top: 16px;
                     color: $cor-roxo;
                     font-weight: 500;
+                    position: relative;
+                    padding: .3125rem 0;
+                    &::after{
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        transform: scaleX(0);
+                        height: 1px;
+                        bottom: 0px;
+                        left: 0;
+                        background-color: $cor-roxo;
+                        transform-origin: bottom right;
+                        transition: transform 0.25s ease-out;
+                    }
+                    
+                    &:hover::after{
+                        transform: scaleX(1);
+                        transform-origin: bottom left;
+                    }
                 }
             }
         }
@@ -302,8 +321,6 @@ body {
 
 }
 
-
-
 .loader {
     opacity: 0;
     display: flex;
@@ -330,9 +347,6 @@ body {
     }
 }
 
-
-
-
 @keyframes bounce {
 
     0%,
@@ -344,8 +358,6 @@ body {
         transform: translateY(-10px);
     }
 }
-
-
 
 .choices {
     width: 250px;
@@ -368,8 +380,6 @@ body {
 .blog__header.scroll .blog__header-busca {
     padding-top: 16px;
 }
-
-
 
 .loader.show {
     opacity: 1;

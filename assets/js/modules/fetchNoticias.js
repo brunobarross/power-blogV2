@@ -5,7 +5,7 @@ export default function getNoticias() {
 
     let pais = 'BR';
     let idioma = 'pt';
-    let categoria;
+    let categoria = undefined;
 
     let ativo = false;
 
