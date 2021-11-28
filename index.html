@@ -24,7 +24,9 @@
       <div class="container">
         <div class="menu">
           <div class="logo">
-            <a href="index.html"><ion-icon name="newspaper-outline"></ion-icon>Power</a>
+            <a href="index.html"
+              ><ion-icon name="newspaper-outline"></ion-icon>Power</a
+            >
           </div>
           <nav>
             <a href="https://github.com/brunobarross" target="_blank"
@@ -43,7 +45,11 @@
             <span class="img__lupa">
               <ion-icon name="search-outline"></ion-icon
             ></span>
-            <input type="text" placeholder="Pesquisar no blog" id="inptBusca" />
+            <input
+              type="text"
+              placeholder="Pesquisar por palavra chave"
+              id="inptBusca"
+            />
           </div>
           <span>©️ 2021 Orgulhosamente desenvolvido por Altamiro Bruno.</span>
         </div>
@@ -54,12 +60,10 @@
       <div class="container">
         <div class="filtro__wrapper">
           <div class="filtro__input">
-            <label for="filtroPais">Selecione a Região
-            </label>
+            <label for="filtroPais">Selecione a Região </label>
             <select name="filtro" id="filtroPais">
               <option value="Brasil">Brasil</option>
               <option value="Internacional">Internacional</option>
-              
             </select>
           </div>
           <div class="filtro__input">
@@ -72,7 +76,6 @@
               <option value="Politica">Política</option>
             </select>
           </div>
-      
         </div>
 
         <div class="blog__conteudo-wrapper" data-js="noticias"></div>
@@ -83,6 +86,10 @@
       <div class="circle"></div>
       <div class="circle"></div>
       <div class="circle"></div>
+    </div>
+
+    <div class="get__more">
+        <button type="button" id="maisNoticias">Ver mais posts</button>
     </div>
 
     <script

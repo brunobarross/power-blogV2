@@ -9,9 +9,11 @@ export default function getNoticias() {
 
     let ativo = false;
 
+    const mobileScreen = window.matchMedia('(max-width:1024px)').matches;
     const wrapper = document.querySelector('[data-js="noticias"]')
     const inptBusca = document.querySelector('#inptBusca')
     const loader = document.querySelector('.loader')
+
 
 
 
@@ -62,9 +64,7 @@ export default function getNoticias() {
                 <div class="blog__conteudo-wrapper-item-texto">
                     <div class="blog__conteudo-wrapper-item-texto-informacoes">
                         <span class="data__publicacao" data-dia="${data}">${data}</span>
-                        ${author != '' ? `
-                        <span class="autor">por <span>${author}</span></span>
-                        `: ''}
+             
                         <a href="#" class="btn__favorite"></a>
                     </div>
                     <h2 class="titulo__materia" data-titulo="${title}">${title}</h2>
@@ -75,10 +75,10 @@ export default function getNoticias() {
                 </div>
             </div>
             `
-                });
+        });
         wrapper.innerHTML += postsTemplate.join('');
         searchNews();
-    
+
     }
 
 
@@ -122,15 +122,25 @@ export default function getNoticias() {
 
 
     /* adicionar evento ao chegar no fim da página */
+    if (!mobileScreen) {
+        window.addEventListener('scroll', () => {
+            const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
+            console.log(clientHeight, scrollHeight, scrollTop)
+            const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 10;
+            if (isPageBottomAlmostReached && !ativo) {
+                showLoader();
+            }
+        })
+    } else if (mobileScreen) {
+        document.querySelector('#maisNoticias').addEventListener('click', () => {
+            if (!ativo) {
+                showLoader();
+            }
+        })
 
-    window.addEventListener('scroll', () => {
-        const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
-        console.log(clientHeight, scrollHeight, scrollTop)
-        const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 10;
-        if (isPageBottomAlmostReached && !ativo) {
-            showLoader();
-        }
-    })
+    }
+
+
 
 
 
