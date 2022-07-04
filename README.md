@@ -10,7 +10,7 @@
 
 <ul>
   <li>Responsividade para telas mobile usando SASS</li>
-  <liBusca por noticias sem recarregar a página</li>
+  <li>Busca por noticias sem recarregar a página</li>
   <li>Scroll infinito carregando mais noticas ao chegar no fim da página</li>
 
 </ul>
