@@ -4,7 +4,7 @@
 <p>A ideia do projeto era de criar um mini portal de noticias atuais e reais.</p>
 <p>O powerblog foi desenvolvido utilizando: HTML, CSS e Javascript para consumir a API CURRENT NEWS.</p>
 
-![Power Blog](preview.gif)
+![Power Blog](chrome_3qvX5yY8zr.gif)
 
 <h2>Melhorias e novidades implementadas no projeto: </h2>
 
