@@ -1,6 +1,15 @@
+<h1>Power Blog</h1>
+ 
+ 
+<p>A ideia do projeto era de criar um mini portal de noticias atuais e reais.</p>
+<p>O powerblog foi desenvolvido utilizando: HTML, CSS e Javascript para consumir a API CURRENT NEWS.</p>
+![Power Blog.gif)
 
+<h2>Melhorias e novidades implementadas no projeto: </h2>
 
-<h2>Power Blog</h2>
+<ul>
+  <li>Responsividade para telas mobile usando SASS</li>
+  <li>Scroll infinito carregando mais noticas ao chegar no fim da página</li>
 
-<p>Este é um mini portal de notícias que foi feito com HTML5, CSS3 e Javascript puro.</p>
-<p>A ideia do projeto era de pegar notícias reais e atuais a partir de uma api gratuita e aplicar o famoso scroll infinito que exibiria mais notícias conforme chegássemos ao final da página.</p>
+</ul>
+
